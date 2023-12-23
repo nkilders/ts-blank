@@ -1,0 +1,23 @@
+name: Format Code
+
+on:
+    push:
+        branches:
+            - main
+
+env:
+    NODE_VERSION: 20
+
+jobs:
+    format:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+            - run: npm ci
+            - run: npm run format
+            - uses: EndBug/add-and-commit@v9
+              with:
+                  message: 'Format Code'
