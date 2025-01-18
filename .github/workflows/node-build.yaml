@@ -2,6 +2,9 @@ name: Node.js Build
 
 on: push
 
+env:
+    NODE_VERSION: 22
+
 jobs:
     build:
         runs-on: ubuntu-latest
@@ -9,6 +12,6 @@ jobs:
             - uses: actions/checkout@v4
             - uses: actions/setup-node@v4
               with:
-                  node-version: 20
+                  node-version: ${{ env.NODE_VERSION }}
             - run: npm ci
             - run: npm run build
